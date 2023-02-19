@@ -89,34 +89,38 @@
 | Password Size | 4 bytes | UInt32 | Password的长度 |  
 | Password | N bytes | Byte[] | Password |
 | isWeChat | 1 byte | Bool | 是否是微信用户 |
-> 以下数据仅在isWeChat为true时才有意义，否则均应为0  
+> 以下数据仅在isWeChat为true时才有意义，否则均应为0 
 
-| WeChatOpenID Size | 4 bytes | UInt32 | WeChatOpenID的长度 | #Size为0时应不发送WeChatOpenID
+| Field | Length | Type | Meaning |  
+|-|-|-|-|
+| WeChatOpenID Size | 4 bytes | UInt32 | WeChatOpenID的长度 #Size为0时应不发送WeChatOpenID| 
 | WeChatOpenID | N bytes | Byte[] | WeChatOpenID |
-| WeChatUnionID Size | 4 bytes | UInt32 | WeChatUnionID的长度 | #Size为0时应不发送WeChatUnionID
+| WeChatUnionID Size | 4 bytes | UInt32 | WeChatUnionID的长度 #Size为0时应不发送WeChatUnionID| 
 | WeChatUnionID | N bytes | Byte[] | WeChatUnionID |
-| WeChatNickName Size | 4 bytes | UInt32 | WeChatNickName的长度 | #Size为0时应不发送WeChatNickName
+| WeChatNickName Size | 4 bytes | UInt32 | WeChatNickName的长度 #Size为0时应不发送WeChatNickName| 
 | WeChatNickName | N bytes | Byte[] | WeChatNickName |
-| WeChatAvatarUrl Size | 4 bytes | UInt32 | WeChatAvatarUrl的长度 | #Size为0时应不发送WeChatAvatarUrl
+| WeChatAvatarUrl Size | 4 bytes | UInt32 | WeChatAvatarUrl的长度 #Size为0时应不发送WeChatAvatarUrl| 
 | WeChatAvatarUrl | N bytes | Byte[] | WeChatAvatarUrl |
-| WeChatGender | 4 byte | UInt32 | WeChatGender | #0为未知，1为男，2为女, 3为其他
-| WeChatCountry Size | 4 bytes | UInt32 | WeChatCountry的长度 | #Size为0时应不发送WeChatCountry
+| WeChatGender | 4 byte | UInt32 | WeChatGender #0为未知，1为男，2为女, 3为其他| 
+| WeChatCountry Size | 4 bytes | UInt32 | WeChatCountry的长度 #Size为0时应不发送WeChatCountry| 
 | WeChatCountry | N bytes | Byte[] | WeChatCountry | 
-| WeChatProvince Size | 4 bytes | UInt32 | WeChatProvince的长度 | #Size为0时应不发送WeChatProvince
+| WeChatProvince Size | 4 bytes | UInt32 | WeChatProvince的长度 #Size为0时应不发送WeChatProvince| 
 | WeChatProvince | N bytes | Byte[] | WeChatProvince |
-| WeChatCity Size | 4 bytes | UInt32 | WeChatCity的长度 | #Size为0时应不发送WeChatCity
+| WeChatCity Size | 4 bytes | UInt32 | WeChatCity的长度 #Size为0时应不发送WeChatCity| 
 | WeChatCity | N bytes | Byte[] | WeChatCity |
 > 以下数据仅在isWeChat为false时才有意义，否则均应为0    
 
+| Field | Length | Type | Meaning |  
+|-|-|-|-|
 | userID | 4 bytes | UInt32 | 用户ID |
-| Email Size | 4 bytes | UInt32 | Email的长度 | #Size为0时应不发送Email
+| Email Size | 4 bytes | UInt32 | Email的长度 #Size为0时应不发送Email| 
 | Email | N bytes | Byte[] | Email |
-| Phone Size | 4 bytes | UInt32 | Phone的长度 | #Size为0时应不发送Phone
+| Phone Size | 4 bytes | UInt32 | Phone的长度 #Size为0时应不发送Phone| 
 | Phone | N bytes | Byte[] | Phone |
-| nickname Size | 4 bytes | UInt32 | nickname的长度 | #Size为0时应不发送nickname
+| nickname Size | 4 bytes | UInt32 | nickname的长度  #Size为0时应不发送nickname|
 | nickname | N bytes | Byte[] | nickname |
-| avatar ID | 4 bytes | UInt32 | 头像的ID | #Size为0时应不发送avatarUrl
-| personal signature Size | 4 bytes | UInt32 | 个性签名的长度 | #Size为0时应不发送personal signature
+| avatar ID | 4 bytes | UInt32 | 头像的ID #Size为0时应不发送avatarUrl| 
+| personal signature Size | 4 bytes | UInt32 | 个性签名的长度 #Size为0时应不发送personal signature| 
 | personal signature | N bytes | Byte[] | personal signature |
 
 ###### Login Request Body:  
