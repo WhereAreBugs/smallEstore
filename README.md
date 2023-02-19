@@ -137,7 +137,7 @@
 |-|-|-|-|  
 | Status | 1 byte | Bool | 是否成功 |  
 
-#**通信协议-商品数据(仍在计划中)**  
+# **通信协议-商品数据(仍在计划中)**  
 
 ###### Header： 
 | Field | Length | Type | Meaning |  
@@ -187,7 +187,7 @@
 | Product ID | 4 bytes | UInt64 | 商品 ID |
 | Product Seller ID | 4 bytes | UInt32 | Product 商家ID|
 | Product level | 4 bytes | UInt32 | Product level |
- #**通信协议-订单数据(仍在计划中)**
+ # **通信协议-订单数据(仍在计划中)**
 ###### Header：
 | Field | Length | Type | Meaning |
 |-|-|-|-|
@@ -285,7 +285,7 @@
 | 16 | 已退款拒收退货 |
 | 17 | 已退款退货拒收退货 |
 | 18 | 已退款拒收退货退款 |
-#**通信协议-商家数据(仍在计划中)**
+# **通信协议-商家数据(仍在计划中)**
 ###### Header：
 | Field | Length | Type | Meaning |
 |-|-|-|-|
@@ -355,7 +355,7 @@
 | seller website | N bytes | Byte[] | seller website |
 | seller wechat size | 4 bytes | UInt32 | seller wechat size |
 | seller wechat | N bytes | Byte[] | seller wechat |
-#**通信协议-广场数据(仍在计划中)**
+# **通信协议-广场数据(仍在计划中)**
 ###### Header：
 | Field | Length | Type | Meaning |
 |-|-|-|-|
@@ -391,7 +391,7 @@
 | post amount of shares | 4 bytes | UInt32 | post amount of shares |
 | post amount of reports | 4 bytes | UInt32 | post amount of reports |
 | post amount of saves | 4 bytes | UInt32 | 收藏数量 |
-#**通信协议-评论数据(仍在计划中)**
+# **通信协议-评论数据(仍在计划中)**
 ###### Header：
 | Field | Length | Type | Meaning |
 |-|-|-|-|
