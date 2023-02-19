@@ -62,6 +62,109 @@
 **默认端口**:1434
 
 **通信协议-用户数据(仍在计划中)**
+###### Header：
+| Field | Length | Type | Meaning |
+|-|-|-|-|
+| MagicNumber | 4 bytes | UInt32 | 魔数（固定为1710）|
+| Size | 4 bytes | UInt32 | 包大小，不包括头部 |
+| Type | 4 bytes | UInt32 | 包类型 |
+| Padding | 4 bytes | UInt32 | 填充（固定为0）|
+###### Types:
+| Number | Meaning |
+|-|-|
+| 0 | Register请求 |
+| 1 | Login请求 |
+| 2 | Register响应 |
+| 3 | Login响应 |
+###### Register Request Body:
+| Field | Length | Type | Meaning |
+|-|-|-|-|
+| Username Size | 4 bytes | UInt32 | Username的长度 |
+| Username | N bytes | Byte[] | Username |
+| Password Size | 4 bytes | UInt32 | Password的长度 |
+| Password | N bytes | Byte[] | Password |
+###### Login Request Body:
+| Field | Length | Type | Meaning |
+|-|-|-|-|
+| Username Size | 4 bytes | UInt32 | Username的长度 |
+| Username | N bytes | Byte[] | Username |
+| Password Size | 4 bytes | UInt32 | Password的长度 |
+| Password | N bytes | Byte[] | Password |
+###### Register Response Body:
+| Field | Length | Type | Meaning |
+|-|-|-|-|
+| Status | 1 byte | Bool | 是否成功 |
+###### Login Response Body:
+| Field | Length | Type | Meaning |
+|-|-|-|-|
+| Status | 1 byte | Bool | 是否成功 |
+
 **通信协议-图片数据(仍在计划中)**
+###### Header：
+| Field | Length | Type | Meaning |
+|-|-|-|-|
+| MagicNumber | 4 bytes | UInt32 | 魔数（固定为1712）|
+| Size | 4 bytes | UInt32 | 包大小，不包括头部 |
+| Type | 4 bytes | UInt32 | 包类型 |
+| Padding | 4 bytes | UInt32 | 填充（固定为0）|
+###### Types:
+| Number | Meaning |
+|-|-|
+| 0 | Upload请求 |
+| 1 | Download请求 |
+| 2 | Upload响应 |
+| 3 | Download响应 |
+###### Upload Request Body:
+| Field | Length | Type | Meaning |
+|-|-|-|-|
+| Image Size | 4 bytes | UInt32 | Image的长度 |
+| Image | N bytes | Byte[] | Image |
+###### Download Request Body:
+| Field | Length | Type | Meaning |
+|-|-|-|-|
+| Image Size | 4 bytes | UInt32 | Image的长度 |
+| Image | N bytes | Byte[] | Image |
+###### Upload Response Body:
+| Field | Length | Type | Meaning |
+|-|-|-|-|
+| Status | 1 byte | Bool | 是否成功 |
+###### Download Response Body:
+| Field | Length | Type | Meaning |
+|-|-|-|-|
+| Status | 1 byte | Bool | 是否成功 |
+
 **通信协议-商品数据(仍在计划中)**
+###### Header：
+| Field | Length | Type | Meaning |
+|-|-|-|-|
+| MagicNumber | 4 bytes | UInt32 | 魔数（固定为1714）|
+| Size | 4 bytes | UInt32 | 包大小，不包括头部 |
+| Type | 4 bytes | UInt32 | 包类型 |
+| Padding | 4 bytes | UInt32 | 填充（固定为0）|
+###### Types:
+| Number | Meaning |
+|-|-|
+| 0 | Upload请求 |
+| 1 | Download请求 |
+| 2 | Upload响应 |
+| 3 | Download响应 |
+###### Upload Request Body:
+| Field | Length | Type | Meaning |
+|-|-|-|-|
+| Product Size | 4 bytes | UInt32 | Product的长度 |
+| Product | N bytes | Byte[] | Product |
+###### Download Request Body:
+| Field | Length | Type | Meaning |
+|-|-|-|-|
+| Product Size | 4 bytes | UInt32 | Product的长度 |
+| Product | N bytes | Byte[] | Product |
+###### Upload Response Body:
+| Field | Length | Type | Meaning |
+|-|-|-|-|
+| Status | 1 byte | Bool | 是否成功 |
+###### Download Response Body:
+| Field | Length | Type | Meaning |
+|-|-|-|-|
+| Status | 1 byte | Bool | 是否成功 |
+
 *有待进一步开发*
