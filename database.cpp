@@ -163,54 +163,76 @@ void database::sigHelder(int signum) {
 }
 
 void database::taskSync(int *readerFd, int *senderFd) {
+    /*
+     * description: 从管道中拿数据
+     * warning: No_return! 方法会阻塞！
+     */
     uint32_t type = 0;
     int sockID = -1;
+    int method = 0;
     while (true) {
-        pipeReader(readerFd[0], &type, sizeof(int));
-        switch (type) {
-            case 0://put
-            {
-                uint32_t keySize, valueSize = 0;
-                std::string targetKey, targetValue;
-                pipeReader(readerFd[0], &keySize, 4) ;
-                targetKey.resize(keySize);
-                pipeReader(readerFd[0], const_cast<char *>(targetKey.data()), keySize);
-                pipeReader(readerFd[0], &valueSize, 4);
-                targetValue.resize(valueSize);
-                pipeReader(readerFd[0], const_cast<char *>(targetValue.data()), valueSize);
-                pipeReader(readerFd[0], &sockID, sizeof(int));
-                log(info, "database:收到put请求！");
-                databaseThreadPool.addTasks(
-                        std::bind(&database::putResponse, this, targetKey, targetValue, sockID, senderFd));
+        pipeReader(readerFd[0], &method, sizeof(int));
+        switch (method) {
+            case 0:{
+                /*
+                 * magicnumber: 1234
+                 * description: 用于Key-Value的IO
+                 */
+                pipeReader(readerFd[0], &type, sizeof(int));
+                switch (type) {
+                    case 0://put
+                    {
+                        uint32_t keySize, valueSize = 0;
+                        std::string targetKey, targetValue;
+                        pipeReader(readerFd[0], &keySize, 4) ;
+                        targetKey.resize(keySize);
+                        pipeReader(readerFd[0], const_cast<char *>(targetKey.data()), keySize);
+                        pipeReader(readerFd[0], &valueSize, 4);
+                        targetValue.resize(valueSize);
+                        pipeReader(readerFd[0], const_cast<char *>(targetValue.data()), valueSize);
+                        pipeReader(readerFd[0], &sockID, sizeof(int));
+                        log(info, "database:收到put请求！");
+                        databaseThreadPool.addTasks(
+                                std::bind(&database::putResponse, this, targetKey, targetValue, sockID, senderFd));
+                        break;
+                    }
+                    case 1://delete
+                    {
+                        uint32_t keySize;
+                        std::string targetKey;
+                        pipeReader(readerFd[0], &keySize, 4);
+                        targetKey.resize(keySize);
+                        pipeReader(readerFd[0], const_cast<char *>(targetKey.data()), keySize);
+                        pipeReader(readerFd[0], &sockID, sizeof(int));
+                        log(info, "database:收到delete请求!key=" + targetKey);
+                        databaseThreadPool.addTasks(std::bind(&database::deleteResponse, this, targetKey, sockID, senderFd));
+                        break;
+                    }
+                    case 2: { //get
+                        uint32_t keySize;
+                        std::string targetKey;
+                        pipeReader(readerFd[0], &keySize, 4);
+                        targetKey.resize(keySize);
+                        pipeReader(readerFd[0], const_cast<char *>(targetKey.data()), keySize);
+                        pipeReader(readerFd[0], &sockID, sizeof(int));
+                        log(info, "database:处理Get请求:key=" + targetKey);
+                        databaseThreadPool.addTasks(std::bind(&database::getResponse, this, targetKey, sockID, senderFd));
+                        break;
+                    }
+                    default: { //error
+                        log(error, "database:错误的type！");
+                        break;
+                    }
+                }
                 break;
             }
-            case 1://delete
-            {
-                uint32_t keySize;
-                std::string targetKey;
-                pipeReader(readerFd[0], &keySize, 4);
-                targetKey.resize(keySize);
-                pipeReader(readerFd[0], const_cast<char *>(targetKey.data()), keySize);
-                pipeReader(readerFd[0], &sockID, sizeof(int));
-                log(info, "database:收到delete请求!key=" + targetKey);
-                databaseThreadPool.addTasks(std::bind(&database::deleteResponse, this, targetKey, sockID, senderFd));
-                break;
+            case 1:{
+                pipeReader(readerFd[0], &type, sizeof(int));
+
             }
-            case 2: {
-                uint32_t keySize;
-                std::string targetKey;
-                pipeReader(readerFd[0], &keySize, 4);
-                targetKey.resize(keySize);
-                pipeReader(readerFd[0], const_cast<char *>(targetKey.data()), keySize);
-                pipeReader(readerFd[0], &sockID, sizeof(int));
-                log(info, "database:处理Get请求:key=" + targetKey);
-                databaseThreadPool.addTasks(std::bind(&database::getResponse, this, targetKey, sockID, senderFd));
-                break;
-            }
-            default: {
-                log(error, "database:错误的type！");
-                break;
-            }
+
+
+
         }//从管道中解析任务并且添加对应的任务到线程池
     }
 }

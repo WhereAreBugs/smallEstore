@@ -18,6 +18,13 @@ private:
     std::mutex databaseLocker;
     std::mutex pipeLocker;
     threadPool databaseThreadPool; //线程池
+    struct userInfo {
+        std::string userName;
+        int uid;
+        std::string Avatar;
+    };
+    std::map<int, userInfo> userInfos;
+    std::mutex userInfosLocker;
 
 public:
     void start(int readerFd[2], int senderFd[2]);
@@ -26,7 +33,7 @@ public:
 
     std::string getValue(const std::string &targetKey);
 
-    bool deleteValue(const std::string& t_key);
+    bool deleteValue(const std::string &t_key);
 
     bool saveToFile();
 

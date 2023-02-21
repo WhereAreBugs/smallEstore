@@ -29,7 +29,7 @@ private:
     std::vector<std::thread> acceptThreads;
     threadPool networkIoThreads;
     std::mutex pipeReadLocker;
-    std::mutex pipeSendLocker;
+
 public:
     int init(short port);
 
@@ -48,7 +48,7 @@ public:
     [[noreturn]] void senderTaskerGetter(int *senderFd);
 
     void *reader(int *readerFd, int targetSockId);
-
+    void reader_userData(int *readerFd, int targetSockId);
     void putResponse(bool status, int sockId);
 
     void deleteResponse(bool status, int sockId);

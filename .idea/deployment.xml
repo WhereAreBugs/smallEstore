@@ -2,6 +2,17 @@
 <project version="4">
   <component name="PublishConfigData" remoteFilesAllowedToDisappearOnAutoupload="false">
     <serverData>
+      <paths name="local (9e787dcf-c5d0-4037-a31d-f9bac3e05ecc)">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/tmp/tmp.MnMOs9mFCg" local="$PROJECT_DIR$" />
+          </mappings>
+          <excludedPaths>
+            <excludedPath local="true" path="$PROJECT_DIR$/cmake-build-debug-local" />
+            <excludedPath local="true" path="$PROJECT_DIR$/cmake-build-debug-default" />
+          </excludedPaths>
+        </serverdata>
+      </paths>
       <paths name="华为云 (ad6f9c6c-70fb-449d-bbf7-0ba6b1d808df)">
         <serverdata>
           <mappings>
