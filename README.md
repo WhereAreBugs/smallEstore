@@ -870,7 +870,7 @@
 | MagicNumber | 4 bytes | UInt32 | 魔数（固定为1725）|
 | Size | 4 bytes | UInt32 | 包大小，不包括头部 |
 | Type | 4 bytes | UInt32 | 包类型 |
-| Padding | 4 bytes | UInt32 | 填充（固定为0）|
+| user ID | 4 bytes | UInt32 | 用户ID |
 ###### Types:
 | Number | Meaning |
 |-|-|
@@ -902,7 +902,7 @@
 | MagicNumber | 4 bytes | UInt32 | 魔数（固定为1725）|
 | Size | 4 bytes | UInt32 | 包大小，不包括头部 |
 | Type | 4 bytes | UInt32 | 包类型 |
-| Padding | 4 bytes | UInt32 | 填充（固定为0）|
+| user ID | 4 bytes | UInt32 | User ID |
 ###### Types:
 | Number | Meaning |
 |-|-|
@@ -916,11 +916,48 @@
 | Field | Length | Type | Meaning |
 |-|-|-|-|
 | footprint ID page | 4 bytes | UInt32 | footprint ID page |
-| footprint ID size | 4 bytes | UInt32 | footprint ID size (MAX: 20)|
 | footprint ID | 4*N bytes | UInt32[] | footprint ID |
 ###### get footprint list response body:
 | Field | Length | Type | Meaning |
+|-|-|-|-|
+| Status | 1 byte | Bool | 是否成功 |
+| footprint ID page | 4 bytes | UInt32 | footprint ID total page |
+| footprint ID size | 4 bytes | UInt32 | footprint ID size |
+| footprint ID | 4*N bytes | UInt32[] | footprint ID |
+###### add footprint request body:
+| Field | Length | Type | Meaning |
+|-|-|-|-|
+| type | 1 byte | UInt8 | 历史记录的类型(商品、旅游、商家等) | 
+| ID | 4 bytes | UInt32 | 历史记录类型对应的ID |
+| time | 8 bytes | UInt64 | 历史记录的时间(后端仅作存储和排序，前端可自由定义。推荐使用union来记录或者时间戳) |
 
+###### add footprint response body:
+| Field | Length | Type | Meaning |
+|-|-|-|-|
+| Status | 1 byte | Bool | 是否成功 |
+
+###### delete footprint request body:
+| Field | Length | Type | Meaning |
+|-|-|-|-|
+| type | 1 byte | UInt8 | 历史记录的类型(商品、旅游、商家等) |
+| footprint ID | 4 bytes | UInt32 | footprint ID |
+
+###### delete footprint response body:
+| Field | Length | Type | Meaning |
+|-|-|-|-|
+| Status | 1 byte | Bool | 是否成功 |
+
+###### get footprint request body:
+| Field | Length | Type | Meaning |
+|-|-|-|-|
+| type | 1 byte | UInt8 | 历史记录的类型(商品、旅游、商家等) |
+| footprint ID | 4 bytes | UInt32 | footprint ID |
+
+###### get footprint response body:
+| Field | Length | Type | Meaning |
+|-|-|-|-|
+| Status | 1 byte | Bool | 是否成功 |
+| 
 
 # **通信协议-优惠券**
 //TODO: 店铺优惠券、商品优惠券、满减

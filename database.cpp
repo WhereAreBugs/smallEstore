@@ -230,9 +230,6 @@ void database::taskSync(int *readerFd, int *senderFd) {
                 pipeReader(readerFd[0], &type, sizeof(int));
 
             }
-
-
-
         }//从管道中解析任务并且添加对应的任务到线程池
     }
 }
